@@ -62,7 +62,6 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed() {
-        view.endEditing(true)
         delegate.setNewColor(with: mainView.backgroundColor ?? .white)
         dismiss(animated: true)
     }
@@ -115,6 +114,9 @@ class SettingsViewController: UIViewController {
         blueSlider.value = Float(someColor.blue)
     }
     
+    @objc private func didTapDone() {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -123,44 +125,43 @@ extension SettingsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         guard let someText = textField.text else { return }
-        guard let floatValue = Float(someText) else { return }
         
-        switch textField {
-        case redTF:
-            redSlider.value = floatValue
-            redLabel.text = someText
-            rgbAction(redSlider)
-        case greenTF:
-            greenSlider.value = floatValue
-            greenLabel.text = someText
-            rgbAction(greenSlider)
-        default:
-            blueSlider.value = floatValue
-            blueLabel.text = someText
-            rgbAction(blueSlider)
+        if let floatValue = Float(someText) {
+            switch textField {
+            case redTF:
+                redSlider.setValue(floatValue, animated: true)
+                setValue(for: redLabel)
+            case greenTF:
+                greenSlider.setValue(floatValue, animated: true)
+                setValue(for: greenLabel)
+            default:
+                blueSlider.setValue(floatValue, animated: true)
+                setValue(for: blueLabel)
+            }
+            
+            mixColor()
+            return
         }
-    }
+}
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.sizeToFit()
+        textField.inputAccessoryView = keyboardToolbar
         
-        guard let someText = textField.text else { return false }
-        guard let floatValue = Float(someText) else { return false }
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(didTapDone)
+        )
         
-        switch textField {
-        case redTF:
-            redSlider.value = floatValue
-            redLabel.text = someText
-            rgbAction(redSlider)
-        case greenTF:
-            greenSlider.value = floatValue
-            greenLabel.text = someText
-            rgbAction(greenSlider)
-        default:
-            blueSlider.value = floatValue
-            blueLabel.text = someText
-            rgbAction(blueSlider)
-        }
-        return true
+        let flexBarButton = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        
+        keyboardToolbar.items = [flexBarButton, doneButton]
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
