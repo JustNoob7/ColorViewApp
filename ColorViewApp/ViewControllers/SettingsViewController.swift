@@ -9,6 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+// MARK: - IBOutlets
     @IBOutlet var mainView: UIView!
     
     @IBOutlet var redLabel: UILabel!
@@ -23,6 +24,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet var greenTF: UITextField!
     @IBOutlet var blueTF: UITextField!
     
+// MARK: - Public properties
     var color: UIColor!
     var delegate: SettingsViewControllerDelegate!
     
@@ -34,35 +36,34 @@ class SettingsViewController: UIViewController {
         blueTF.delegate = self
         
         mainView.layer.cornerRadius = 20
-//        mainView.backgroundColor = color
+        mainView.backgroundColor = color
         
         setSliders(with: color)
-        
         setValue(for: redLabel, greenLabel, blueLabel)
         setValue(for: redTF, greenTF, blueTF)
     }
     
 // MARK: - IBActions
-    
+
     @IBAction func rgbAction(_ sender: UISlider) {
         mixColor()
         
         switch sender {
         case redSlider:
-            redLabel.text = string(from: sender)
-            redTF.text = string(from: sender)
+            setValue(for: redLabel)
+            setValue(for: redTF)
         case greenSlider:
-            greenLabel.text = string(from: sender)
-            greenTF.text = string(from: sender)
+            setValue(for: greenLabel)
+            setValue(for: greenTF)
         default:
-            blueLabel.text = string(from: sender)
-            blueTF.text = string(from: sender)
+            setValue(for: blueLabel)
+            setValue(for: blueTF)
         }
     }
     
     @IBAction func doneButtonPressed() {
         view.endEditing(true)
-        delegate.setNewColor(with: mainView.backgroundColor ?? .blue)
+        delegate.setNewColor(with: mainView.backgroundColor ?? .white)
         dismiss(animated: true)
     }
     
@@ -80,11 +81,11 @@ class SettingsViewController: UIViewController {
         labels.forEach { label in
             switch label {
             case redLabel:
-                redLabel.text = string(from: redSlider)
+                label.text = string(from: redSlider)
             case greenLabel:
-                greenLabel.text = string(from: greenSlider)
+                label.text = string(from: greenSlider)
             default:
-                blueLabel.text = string(from: blueSlider)
+                label.text = string(from: blueSlider)
             }
         }
     }
@@ -93,11 +94,11 @@ class SettingsViewController: UIViewController {
         textfields.forEach { textfield in
             switch textfield {
             case redTF:
-                redTF.text = string(from: redSlider)
+                textfield.text = string(from: redSlider)
             case greenTF:
-                greenTF.text = string(from: greenSlider)
+                textfield.text = string(from: greenSlider)
             default:
-                blueTF.text = string(from: blueSlider)
+                textfield.text = string(from: blueSlider)
             }
         }
     }

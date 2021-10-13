@@ -59,7 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				53ACA750271701D80045AA46 /* App */,
-				53ACA7532717020A0045AA46 /* New Group */,
+				53ACA7532717020A0045AA46 /* ViewControllers */,
 				53ACA752271701FE0045AA46 /* Storyboards */,
 				53ACA751271701EF0045AA46 /* Resources */,
 			);
@@ -93,13 +93,13 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		53ACA7532717020A0045AA46 /* New Group */ = {
+		53ACA7532717020A0045AA46 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				5392DE8C270E1750002C53B3 /* SettingsViewController.swift */,
 				53263AAB2713824100549019 /* MainViewController.swift */,
 			);
-			path = "New Group";
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,7 +327,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 292XY44XLL;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ColorViewApp/Info.plist;
+				INFOPLIST_FILE = ColorViewApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -355,7 +355,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 292XY44XLL;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ColorViewApp/Info.plist;
+				INFOPLIST_FILE = ColorViewApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
